@@ -1,0 +1,35 @@
+<h1>商品列表</h1>
+
+<table>
+  <tr>
+    <th>图像</th>
+    <th>描述</th>
+    <th>价格</th>
+    <th>操作</th>
+  </tr>
+
+  <% @products.each do |product| %>
+      <tr class="<%=cycle('tr_odd','tr_even')%>">
+        <td>
+          <%= image_tag(product.img_url,:class => 'show_image',:width => 45,:height => 45) %>
+        </td>
+        <td clas="list_desc">
+          <dt title="<%=product.description%>"><%= product.title %></dt>
+        </td>
+        <td><%= product.price %></td>
+        <td class="list_actions">
+          <%= link_to '详情', product %><br/>
+          <%= link_to '修改', edit_product_path(product) %><br/>
+          <%= link_to '删除',product,
+                      :confirm => 'Are you sure?',
+                      :method => :delete%><br/>
+        </td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan="4" style="padding-top: 5px">
+      <%= button_to '添加商品', new_product_path ,:method => 'get'%>
+    </td>
+  </tr>
+</table>
+
